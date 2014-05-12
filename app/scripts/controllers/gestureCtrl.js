@@ -9,23 +9,14 @@ angular.module('cordovaTestApp')
 
   var el = document.getElementById('drag');
   
-  Hammer(el).on('dragend', function(){
-    // console.log('dragend');
-    $scope.items.push(newItem);
-    newItem = newItem + 1;
-    $scope.$apply();
+  Hammer(el).on('dragend', function(ev){
+    //ev.preventDefault();    //prevent the browser default handling of drag gestures on mobile device
+    // console.log(ev);
+    if (ev.gesture.deltaY>100){   //related info about this move
+      $scope.items.push(newItem);
+      newItem = newItem + 1;
+      $scope.$apply();
+      ev.gesture.stopDetect();    //finish the current detection session
+    }
   });
-
-  $scope.onReload = function(){
-      // alert('fuck');
-      // var deferred = $q.deferred();
-
-      // var promise = $timeout(function(){
-      //   $scope.items.push(newItem);
-      //   newItem = newItem + 1;
-      // },3000);
-
-      // promise.then(console.log('resolved'));
-  }
-  
 }]);
