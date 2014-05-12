@@ -6,7 +6,7 @@ angular
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'mgcrea.pullToRefresh'
+    'angular-gestures'
   ])
   .config(function ($routeProvider) {
     $routeProvider

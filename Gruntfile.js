@@ -34,7 +34,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        // tasks: ['newer:jshint:all'],
         options: {
           livereload: true
         }
@@ -159,8 +159,9 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        sassDir: '<%= yeoman.app %>/styles',    
+        // cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.app %>/styles',   //change css directory from .tmp to styles
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
@@ -303,12 +304,14 @@ module.exports = function (grunt) {
           cwd: '<%= yeoman.app %>',
           dest: '<%= yeoman.dist %>',
           src: [
-            '*.{ico,png,txt}',
-            '.htaccess',
-            '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'fonts/*'
+            // '*.{ico,png,txt}',
+            // '.htaccess',
+            // '*.html',
+            // 'views/{,*/}*.html',
+            // 'images/{,*/}*.{webp}',
+            // 'fonts/*'
+            '**/*'    //copy all files for full build purpose
+
           ]
         }, {
           expand: true,
@@ -419,6 +422,23 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+  grunt.registerTask('fullbuild', [
+    'clean:dist',
+    'compass:dist',
+    // //'bowerInstall',
+    // 'useminPrepare',
+    // 'concurrent:dist',
+    // 'autoprefixer',
+    // 'concat',
+    // 'ngmin',
+    'copy:dist',
+    // 'cdnify',
+    // 'cssmin',
+    // 'uglify',
+    // 'rev',
+    // 'usemin',
+    // 'htmlmin'
   ]);
 
   grunt.registerTask('default', [
